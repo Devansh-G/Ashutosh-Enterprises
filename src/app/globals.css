@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens. Industrial/corporate: white canvas, deep navy-blue primary,
+   amber "volt" accent for energy. Change these to rebrand the whole site.
+   --------------------------------------------------------------------------- */
+@theme {
+  --color-brand-50: #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-200: #bfdbfe;
+  --color-brand-300: #93c5fd;
+  --color-brand-400: #60a5fa;
+  --color-brand-500: #2f80ed;
+  --color-brand-600: #1565c0;
+  --color-brand-700: #12518f;
+  --color-brand-800: #0e3d6b;
+  --color-brand-900: #0a2540;
+  --color-brand-950: #061726;
+
+  --color-volt-400: #fbbf24;
+  --color-volt-500: #f59e0b;
+  --color-volt-600: #d97706;
+  /* volt-700 is the only amber safe for TEXT on a light background:
+     volt-600 on white is 3.19:1, under the WCAG AA 4.5:1 floor. This is 5.02:1.
+     Keep volt-400/500 for icons and dark-background accents. */
+  --color-volt-700: #b45309;
+
+  --color-ink: #0f172a;
+  --color-muted: #5b6b7f;
+  --color-hairline: #e3e8ef;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-card: 0 1px 2px rgb(10 37 64 / 0.04), 0 8px 24px -12px rgb(10 37 64 / 0.12);
+  --shadow-card-hover: 0 2px 4px rgb(10 37 64 / 0.06), 0 16px 40px -16px rgb(10 37 64 / 0.22);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Offset anchor targets so the sticky header never covers a heading. */
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Visible, on-brand focus ring for keyboard users. */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* Shared page gutter so every section lines up on the same grid. */
+  .container-page {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 80rem;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+}
+
+/* Respect users who prefer reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
